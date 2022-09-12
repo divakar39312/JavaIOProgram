@@ -1,50 +1,38 @@
 package com.Bridgelabz;
 
-import java.util.List;
-import java.util.Scanner;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class EmployeePayrollService {
-
-    public enum IOService {
-        CONSOLE_IO, FILE_IO, DB_IO, REST_IO
+    // creating arraylist of EmployeePayRoll class
+    ArrayList<EmployeePayRoll> list = new ArrayList<EmployeePayRoll>();
+    Scanner input = new Scanner(System.in);
+    public void readEmployeeData(){
+        // taking employee data from user through scanner input
+        EmployeePayRoll employeePayRoll = new EmployeePayRoll();
+        System.out.println("Enter employee id");
+        employeePayRoll.setId(input.nextInt());
+        System.out.println("Enter employee name");
+        employeePayRoll.setName(input.next());
+        System.out.println("Enter employee salary");
+        employeePayRoll.setSalary(input.nextDouble());
+        // adding data to array list
+        list.add(employeePayRoll);
     }
-
-    private List<EmployeePayrollData> employeePayrollList;
-
-    public EmployeePayrollService() {
+    public void writeEmployeeData(){
+        // Printing all the Employee data stored in array list
+        for(EmployeePayRoll employeePayRoll : list){
+            System.out.println(employeePayRoll.toString());
+        }
     }
-
-    public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
-        this.employeePayrollList = employeePayrollList;
+    public static boolean deleteFiles(File contentsToDelete) {
+        File[] allContents = contentsToDelete.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteFiles(file);
+            }
+        }
+        return contentsToDelete.delete();
     }
-
-    private void readEmployeePayrollData(Scanner consoleInputReader) {
-
-        System.out.println("Enter the Employee Id : ");
-        int id = consoleInputReader.nextInt();
-        System.out.println("Enter the Employee Name : ");
-        String name = consoleInputReader.next();
-        System.out.println("Enter the Employee Salary : ");
-        double salary = consoleInputReader.nextDouble();
-
-        employeePayrollList.add(new EmployeePayrollData(id, name, salary));
-    }
-
-    private void writeEmployeePayrollData() {
-        System.out.println("\nWriting Employee Payroll Roster to Console\n" + employeePayrollList);
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println("Welcome To Employee Payroll Application \n");
-        ArrayList<EmployeePayrollData> employeePayrollList  = new ArrayList<EmployeePayrollData>();
-        EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
-        Scanner consoleInputReader = new Scanner(System.in);
-
-        employeePayrollService.readEmployeePayrollData(consoleInputReader);
-        employeePayrollService.writeEmployeePayrollData();
-
-    }
-
 }
