@@ -2,29 +2,45 @@ package com.Bridgelabz;
 
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class EmployeePayrollMain {
+    /**
+     *
+     * @param args
+     */
+    private ArrayList<EmployeePayRoll> employeePayrollList;
+
+    public EmployeePayrollMain(){
+        employeePayrollList = new ArrayList<>();
+    }
 
     public static void main(String[] args) {
-        // creating object of EmployeePayrollService class
-        EmployeePayrollService emp = new EmployeePayrollService();
+        System.out.println("Employee payroll service program");
+
+        EmployeeFileIOService fileIO = new EmployeeFileIOService();
+        List<EmployeePayRoll> list = new ArrayList<>();
+        list.add(new EmployeePayRoll(1,"divakar",28000));
+        list.add(new EmployeePayRoll(2,"Kumar",30000));
+        list.add(new EmployeePayRoll(3,"yadav",40000));
+        fileIO.writeDataToFile(list);
+
+    }
+
+    public void readEmployeePayrollData(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to Employee Payroll System");
-        while (true) {
-            // taking user input and calling the methods
-            System.out.println("Please select \n1.Add Employee Data\n2.View Employee Data\n3.EXIT");
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                    emp.readEmployeeData();
-                    break;
-                case 2:
-                    emp.writeEmployeeData();
-                    break;
-                case 3:
-                    System.exit(0);
-                default:
-                    System.out.println("enter valid details");
-            }
-        }
+        System.out.println("Enter employee id :");
+        int id = sc.nextInt();
+        System.out.println("Enter employee name : ");
+        String name = sc.next();
+        System.out.println("Enter employee salary : ");
+        double salary = sc.nextDouble();
+        employeePayrollList.add(new EmployeePayRoll(id, name, salary));
+    }
+    public void writeEmployeePayrollData(){
+        System.out.println("writing employee payroll data on console :");
+        System.out.println(employeePayrollList);
     }
 }
