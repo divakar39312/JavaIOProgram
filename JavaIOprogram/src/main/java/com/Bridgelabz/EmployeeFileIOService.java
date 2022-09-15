@@ -3,19 +3,32 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 public class EmployeeFileIOService {
-        public static String PAYROLL_FILE_NAME = "F:\\Programs\\src\\Emppayrollfile.txt";
-        public void writeDataToFile(List<EmployeePayRoll> employeePayrollList) {
-            StringBuffer empBuffer = new StringBuffer();
-            employeePayrollList.forEach(employee -> {
-                String employeeDataString = employee.toString().concat("\n");
-                empBuffer.append(employeeDataString);
-            });
-            try {
-                Files.write(Paths.get(PAYROLL_FILE_NAME), empBuffer.toString().getBytes());
-            }catch (IOException e) {
-                System.out.println(e);
-            }
+    public static String PAYROLL_FILE_NAME = "F:\\programs\\src\\Emppayrollfile.txt";
+    public void writeDataToFile(List<EmployeePayRoll> employeePayrollList) {
+        StringBuffer empBuffer = new StringBuffer();
+        employeePayrollList.forEach(employee -> {
+            String employeeDataString = employee.toString().concat("\n");
+            empBuffer.append(employeeDataString);
+        });
+        try {
+            Files.write(Paths.get(PAYROLL_FILE_NAME), empBuffer.toString().getBytes());
+        }catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    public void printData() {
+        try {
+            Files.lines(new File( PAYROLL_FILE_NAME ).toPath()).forEach(System.out::println);
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
+}

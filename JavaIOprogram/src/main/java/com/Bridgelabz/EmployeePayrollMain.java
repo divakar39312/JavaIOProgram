@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class EmployeePayrollMain {
-    /**
-     *
-     * @param args
-     */
+
+
+
     private ArrayList<EmployeePayRoll> employeePayrollList;
 
     public EmployeePayrollMain(){
@@ -18,15 +21,15 @@ public class EmployeePayrollMain {
     }
 
     public static void main(String[] args) {
-        System.out.println("Employee payroll service program");
+        
 
         EmployeeFileIOService fileIO = new EmployeeFileIOService();
         List<EmployeePayRoll> list = new ArrayList<>();
-        list.add(new EmployeePayRoll(1,"divakar",28000));
-        list.add(new EmployeePayRoll(2,"Kumar",30000));
-        list.add(new EmployeePayRoll(3,"yadav",40000));
+        list.add(new EmployeePayRoll(1,"divakar",40000));
+        list.add(new EmployeePayRoll(2,"Kumar",60000));
+        list.add(new EmployeePayRoll(3,"yadav",50000));
         fileIO.writeDataToFile(list);
-
+        fileIO.printData();
     }
 
     public void readEmployeePayrollData(){
